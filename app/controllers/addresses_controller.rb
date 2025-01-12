@@ -1,0 +1,53 @@
+class AddressesController < ApplicationController
+    before_action :set_user
+    before_action :set_address, only: [:show, :edit, :update, :destroy]
+  
+    def index
+      @addresses = @user.addresses
+    end
+  
+    def show; end
+  
+    def new
+      @address = @user.addresses.build
+    end
+  
+    def create
+      @address = @user.addresses.build(address_params)
+      if @address.save
+        redirect_to user_addresses_path(@user), notice: 'Address added successfully.'
+      else
+        render :new
+      end
+    end
+  
+    def edit; end
+  
+    def update
+      if @address.update(address_params)
+        redirect_to user_addresses_path(@user), notice: 'Address updated successfully.'
+      else
+        render :edit
+      end
+    end
+  
+    def destroy
+      @address.destroy
+      redirect_to user_addresses_path(@user), notice: 'Address deleted successfully.'
+    end
+  
+    private
+  
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+  
+    def set_address
+      @address = @user.addresses.find(params[:id])
+    end
+  
+    def address_params
+      params.require(:address).permit(:line1, :line2, :city, :state, :country, :zip_code)
+    end
+  end
+  

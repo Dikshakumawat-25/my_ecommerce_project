@@ -1,0 +1,24 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center">
+  <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Edit User</h2>
+
+    <%= form_with model: @user, url: user_path(@user), method: :patch, local: true, class: "space-y-4" do |form| %>
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <%= form.text_field :name, id: "name", value: @user.name, class: "w-full mt-1 p-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <%= form.email_field :email, id: "email", value: @user.email, class: "w-full mt-1 p-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div>
+        <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+        <%= form.select :role, ['admin', 'user'], { selected: @user.role }, id: "role", class: "w-full mt-1 p-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <%= form.submit "Update User", class: "w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200" %>
+    <% end %>
+  </div>
+</div>

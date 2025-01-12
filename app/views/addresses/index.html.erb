@@ -1,0 +1,27 @@
+<h1>Addresses</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Line 1</th>
+      <th>Line 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.line1 %></td>
+        <td><%= address.line2 %></td>
+        <td><%= address.city %></td>
+        <td><%= address.state %></td>
+        <td>
+          <%= link_to 'Edit', edit_user_address_path(@user, address), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', user_address_path(@user, address), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Address', new_user_address_path(@user), class: 'btn btn-success' %>
